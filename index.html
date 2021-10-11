@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview image before upload, with Javascript</title>
+    <!-- ("[^\\s]+(.*?)\\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$") -->
+</head>
+<body>
+    <input type="file" multiple>
+    <div></div>
+    <script>
+        let input = document.querySelector("input");
+        let div = document.querySelector("div")
+        input.addEventListener("change", e => {
+            console.log(e.target.files);
+            Array.from(e.target.files).forEach(item => {
+                if (item.name.match("[^\\s]+(.*?)\\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$")) {
+                    div.innerHTML += `
+                <img src="${item.name}"height="200"width="300">
+                `;
+                } else {
+                    alert("please select a valid image file")
+                }
+            })
+            // for single file preview
+            // if (e.target.files[0].name.match("[^\\s]+(.*?)\\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$")) {
+            //     div.innerHTML = `
+            //     <img src="${e.target.files[0].name}"height="200"width="300">
+            //     `;
+            // } else {
+            //     alert("please select a valid image file")
+            // }
+        })
+    </script>
+
+</body>
+</html>
